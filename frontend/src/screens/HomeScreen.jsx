@@ -1,7 +1,7 @@
 import './homeScreen.css'
 
 const HomeScreen = () => {
-  return <div>Home</div>
+  return <div className="homeScreen">HomeScreen</div>
 }
 
 export default HomeScreen
