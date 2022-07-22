@@ -7,10 +7,12 @@ import ProductScreen from './screens/ProductScreen'
 import CartScreen from './screens/CartScreen'
 // import Product from '../../backend/models/product'
 
+//components
+import Navbar from './components/Navbar'
 function App() {
   return (
     <Router>
-      {/* Navbar */}
+      <Navbar />
       {/* SideDrawer */}
       {/* Backdrop */}
       <main>
