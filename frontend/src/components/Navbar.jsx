@@ -5,7 +5,7 @@ const Navbar = ({ click = (fn) => fn() }) => {
     <div className="navbar">
       {/* logo */}
       <div className="navbar__logo">
-        <h2>Furniture Shopping Cart</h2>
+        <h2>Furniture Shopping System</h2>
       </div>
       {/* links */}
       <ul className="navbar__links">
