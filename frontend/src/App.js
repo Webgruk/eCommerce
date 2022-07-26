@@ -26,9 +26,6 @@ function App() {
           <Route exact path="/cart" component={CartScreen} />
         </Switch>
       </main>
-      {/* HomeScreen */}
-      {/* ProductScreen */}
-      {/* cartScreeen*/}
     </Router>
   )
 }
