@@ -1,43 +1,76 @@
 import './productScreen.css'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
-const ProductScreen = () => {
+//Actions
+import { getProductDetail } from '../redux/Actions/productAction'
+import { addToCart } from '../redux/Actions/cartActions'
+
+const ProductScreen = ({ match, history }) => {
+  const [qty, setQty] = useState(1)
+  const dispatch = useDispatch()
+  const getProductDetails = useSelector((state) => state.productDetail)
+
+  const { loading, error, product } = getProductDetails
+
+  useEffect(() => {
+    if (match.params.id !== product._id) {
+      dispatch(getProductDetail(match.params.id))
+    }
+  }, [match, dispatch])
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(product._id, qty))
+    history.push('/cart')
+  }
   return (
     <div className="productScreen">
-      <div className="productscreen__left">
-        <div className="left__image">
-          <img src="../images/chair.jpeg" alt="" />
-        </div>
-        <div className="left__info">
-          <p className="left__name">Product 1</p>
-          <p className="left__name">Price $499.99</p>
-          <p>
-            Desciption: Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Similique veritatis cumque alias repellat dolores quaerat!
-          </p>
-        </div>
-      </div>
-      <div className="productscreen__right">
-        <div className="right__info">
-          <p>
-            Price: <span>$499.99</span>
-          </p>
-          <p>
-            Status: <span>In Stock</span>
-          </p>
-          <p>
-            Qty:
-            <select>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </p>
-          <p>
-            <button type="button">Add to Cart</button>
-          </p>
-        </div>
-      </div>
+      {loading ? (
+        <h2>loading...</h2>
+      ) : error ? (
+        <h2>{error}</h2>
+      ) : (
+        <>
+          <div className="productscreen__left">
+            <div className="left__image">
+              <img src={product.imageUrl} alt="" />
+            </div>
+            <div className="left__info">
+              <p className="left__name">{product.name}</p>
+              <p className="left__name">{product.price}</p>
+              <p>Desciption: {product.description}</p>
+            </div>
+          </div>
+          <div className="productscreen__right">
+            <div className="right__info">
+              <p>
+                Price: <span>{product.price}</span>
+              </p>
+              <p>
+                Status:{' '}
+                <span>
+                  {product.countInStock > 0 ? 'In Stock !!' : 'out of store'}
+                </span>
+              </p>
+              <p>
+                Qty:
+                <select value={qty} onChange={(e) => setQty(e.target.value)}>
+                  {[...Array(product.countInStock).keys()].map((x) => (
+                    <option key={x + 1} value={x + 1}>
+                      {x + 1}
+                    </option>
+                  ))}
+                </select>
+              </p>
+              <p>
+                <button type="button" onClick={addToCartHandler}>
+                  Add to Cart
+                </button>
+              </p>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

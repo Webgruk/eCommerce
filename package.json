@@ -8,7 +8,7 @@
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": " concurrently \"npm run server\" \"npm run client\"",
-    "data:import": "nodemon backend/senderScript.js"
+    "data:import": "nodemon backend/seederScript.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
   "dependencies": {
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
+    "http-proxy-middleware": "^2.0.6",
     "mongoose": "^6.1.7"
   },
   "devDependencies": {

@@ -10,7 +10,7 @@
   place-items: center;
 }
 
-.cart__name {
+.cartitem__name {
   text-decoration: none;
   color: #171717;
 }

@@ -1,6 +1,14 @@
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import './navbar.css'
 const Navbar = ({ click = (fn) => fn() }) => {
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
+  const getCartCount = () => {
+    return cartItems.reduce((qty, item) => qty + Number(item.qt), 0)
+  }
+
   return (
     <div className="navbar">
       {/* logo */}
@@ -14,12 +22,12 @@ const Navbar = ({ click = (fn) => fn() }) => {
             <i className="fas fa-shopping-cart"></i>
             <span>
               Cart
-              <span className="cartlogo__badge">0</span>
+              <span className="cartlogo__badge">{getCartCount()}</span>
             </span>
           </Link>
         </li>
         <li>
-          <Link to="/cart">Shop</Link>
+          <Link to="/">Shop</Link>
         </li>
       </ul>
       {/* humburger menu */}

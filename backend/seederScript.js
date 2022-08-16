@@ -10,9 +10,7 @@ connectDB()
 
 const importData = () => {
   try {
-    // Product.deleteMany({})
-    //   await Product.insertMany(productsData)
-    //   console.log('data imported successfully')
+    Product.deleteMany({})
 
     Product.find((err, product) => {
       if (err) return console.error(err)
